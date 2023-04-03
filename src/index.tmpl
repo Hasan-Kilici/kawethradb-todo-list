@@ -1,0 +1,32 @@
+<form method="POST" action="/addTask/{{ .UserID }}">
+  <input type="text" id="task" name="task">
+  <input type="submit">
+</form>
+<h1>Task List</h1>
+    <ul>
+        {{range .Tasks}}
+            {{ if eq .Taskstatus "Finished"}}
+            <li><strike>{{.Tasks}}</strike> 
+            <form method="POST" action="/deleteTask/{{ .ID }}">
+              <input type="submit" value="sil">
+            </form>
+            <form method="POST" action="/unfinishTask/{{ .ID }}">
+              <input type="submit" value="bitirme">
+            </form></li>
+            {{ else }}
+            <li>{{.Tasks}} 
+            <form method="POST" action="/deleteTask/{{ .ID }}">
+              <input type="submit" value="sil">
+            </form>
+            <form method="POST" action="/finishTask/{{ .ID }}">
+              <input type="submit" value="bitir">
+            </form></li>
+            {{ end }}
+        {{end}}
+    </ul>
+<style>
+li{
+display:flex;
+gap:15px;
+}
+</style>
